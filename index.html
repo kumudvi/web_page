@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Responsive News Website">
+    <title>Dynamic News Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .news-container .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        #load-news {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        #load-news:hover {
+            background-color: #0056b3;
+        }
+
+        #articles {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        #articles img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #articles p {
+            font-size: 16px;
+            color: #333;
+            text-align: left;
+            padding: 10px 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1 class="logo">News Portal</h1>
+    </nav>
+    <section class="news-container" id="home">
+        <div class="container">
+            <button id="load-news">Load News</button>
+            <div id="articles"></div>
+        </div>
+    </section>
+    <script>
+        let a = {
+            status: "ok",
+            totalResults: 35,
+            articles: [
+                {
+                    source: { id: null, name: "Yahoo Entertainment" },
+                    author: "Karen Friar",
+                    title: "Stock market today: Stocks climb after jobs report's massive beat, unemployment rate dip - Yahoo Finance",
+                    description: "Investors braced for a key monthly jobs report, with the Middle East crisis and a return to work at US ports also in high focus.",
+                    url: "https://finance.yahoo.com/news/live/stock-market-today-stocks-climb-after-jobs-reports-massive-beat-unemployment-rate-dip-133053687.html",
+                    urlToImage: "https://s.yimg.com/os/creatr-uploaded-images/2024-08/eee6c6f0-5ec3-11ef-bfff-ac5a36ecc3a9",
+                    publishedAt: "2024-10-04T14:15:00Z",
+                    content: "Stocks climbed on Friday as investors welcomed a key monthly jobs report that showed hiring remains robust in the US economy. The Middle East crisis and a return to work at US ports also stayed in high focus."
+                },
+                {
+                    source: { id: null, name: "BBC News" },
+                    author: null,
+                    title: "Electric cars: EU hits China with tariffs in battle for sales - BBC.com",
+                    description: "The vote risks sparking a trade war as the EU looks to protect its own car makers.",
+                    url: "https://www.bbc.com/news/articles/cly20n4d0g9o",
+                    urlToImage: "https://ichef.bbci.co.uk/news/1024/branded_news/c63b/live/e8bb6010-823b-11ef-869d-c917f0d913e0.jpg",
+                    publishedAt: "2024-10-04T14:02:35Z",
+                    content: "Big taxes will be imposed on imports of electric vehicles from China to the EU after the majority of member states backed the plans. The move to introduce tariffs aims to protect the European car industry from competition."
+                },
+                {
+                    source: { id: "bloomberg", name: "Bloomberg" },
+                    author: "Vinicy Chan, Dong Cao, Benoit Berthelot",
+                    title: "Tencent, Guillemot Family Are Said to Consider Buyout of Ubisoft - Bloomberg",
+                    description: "Tencent Holdings Ltd. and Ubisoft Entertainment SA’s founding Guillemot family are considering options including a potential buyout of the French video game developer after it lost more than half its market value this year.",
+                    url: "https://www.bloomberg.com/news/articles/2024-10-04/tencent-guillemot-family-are-said-to-consider-buyout-of-ubisoft",
+                    urlToImage: "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iMMwgpzJ_E4E/v1/1200x800.jpg",
+                    publishedAt: "2024-10-04T13:47:12Z",
+                    content: "Tencent Holdings Ltd. and Ubisoft Entertainment SAs founding Guillemot family are considering options including a potential buyout of the French video game developer after it lost more than half its market value this year."
+                },
+                {
+                    source: { id: null, name: "Yahoo Entertainment" },
+                    author: "MICHELLE CHAPMAN",
+                    title: "Chief operating officer of Truth Social's parent company resigns - Yahoo Finance",
+                    description: "The chief operating officer of Truth Social's parent company has resigned and the company must hand over almost 800,000 shares to one of its investors as part of a court ruling.",
+                    url: "https://finance.yahoo.com/news/chief-operating-officer-truth-socials-122425134.html",
+                    urlToImage: "https://media.zenfs.com/en/ap_finance_articles_694/1e23d88b18edba1328b6fcc08891e080",
+                    publishedAt: "2024-10-04T13:20:49Z",
+                    content: "The chief operating officer of Truth Social's parent company has resigned and the company must hand over almost 800,000 shares to one of its investors as part of a court ruling, according to a regulatory filing."
+                },
+                {
+                    source: { id: null, name: "CNBC" },
+                    author: "Michael Wayland",
+                    title: "Rivian shares fall after EV maker slashes production forecast, misses Q3 delivery expectations - CNBC",
+                    description: "Rivian produced 13,157 vehicles at its manufacturing facility in Normal, Illinois and delivered 10,018 vehicles during the same period.",
+                    url: "https://www.cnbc.com/2024/10/04/rivian-lowers-production-forecast-misses-q3-delivery-expectations.html",
+                    urlToImage: "https://image.cnbcfm.com/api/v1/image/108015626-17226075032024-06-21t000000z_1231240055_rc2sf8a5sgav_rtrmadp_0_rivian-electric.jpeg?v=1722607565&w=1920&h=1080",
+                    publishedAt: "2024-10-04T12:21:17Z",
+                    content: "Shares of Rivian Automotive dropped about 4% in early trading Friday after the electric vehicle startup delivered fewer vehicles in the third quarter than analysts had expected and lowered its annual production forecast."
+                }
+            ]
+        };
+        document.getElementById("load-news").addEventListener("click", () => {
+            let articlesDiv = document.getElementById("articles");
+            articlesDiv.innerHTML = ""; 
+            a.articles.forEach((article) => {
+                let div = document.createElement('div');
+                let newTitle = document.createElement('h2');
+                newTitle.innerHTML = `<a href="${article.url}" target="_blank">${article.title}</a>`;
+                div.appendChild(newTitle);
+                if (article.urlToImage) {
+                    let newImg = document.createElement('img');
+                    newImg.setAttribute('src', article.urlToImage);
+                    newImg.setAttribute('alt', 'News Image');
+                    div.appendChild(newImg);
+                }
+                if (article.description) {
+                    let newParagraph = document.createElement('p');
+                    newParagraph.innerHTML = article.description;
+                    div.appendChild(newParagraph);
+                }
+                articlesDiv.appendChild(div);
+            });
+        });
+    </script>
+</body>
+</html>
